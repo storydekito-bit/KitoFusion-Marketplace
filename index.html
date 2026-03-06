@@ -1,17 +1,152 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
 <title>KitoFusion Marketplace</title>
+
+<style>
+
+body{
+margin:0;
+background:#0b0b0f;
+font-family:Arial;
+color:white;
+overflow-x:hidden;
+}
+
+/* fond animé */
+
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:radial-gradient(circle,#00ffff22,transparent);
+animation:bgmove 15s linear infinite;
+z-index:-1;
+}
+
+@keyframes bgmove{
+0%{transform:translate(-10%,-10%)}
+50%{transform:translate(10%,10%)}
+100%{transform:translate(-10%,-10%)}
+}
+
+/* header */
+
+header{
+text-align:center;
+padding:60px 20px;
+font-size:40px;
+font-weight:bold;
+background:linear-gradient(90deg,#00ffff,#00ff99);
+-webkit-background-clip:text;
+color:transparent;
+animation:glow 3s infinite alternate;
+}
+
+@keyframes glow{
+from{filter:drop-shadow(0 0 5px #00ffff)}
+to{filter:drop-shadow(0 0 20px #00ffff)}
+}
+
+/* grid produits */
+
+.container{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:40px;
+padding:40px;
+}
+
+/* carte produit */
+
+.card{
+width:260px;
+background:#121218;
+border-radius:15px;
+padding:20px;
+text-align:center;
+transition:0.4s;
+border:1px solid #222;
+}
+
+.card:hover{
+transform:translateY(-10px) scale(1.05);
+box-shadow:0 0 25px #00ffff88;
+}
+
+.card img{
+width:100%;
+border-radius:10px;
+}
+
+/* titre */
+
+.title{
+font-size:22px;
+margin-top:10px;
+}
+
+/* prix */
+
+.price{
+color:#00ffcc;
+margin:10px 0;
+}
+
+/* bouton */
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:8px;
+background:linear-gradient(90deg,#00ffff,#00ff99);
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.1);
+box-shadow:0 0 15px #00ffff;
+}
+
+</style>
 </head>
 
-<body style="background:black;color:white;text-align:center;font-family:Arial;">
+<body>
 
-<h1>KitoFusion Marketplace</h1>
+<header>
+KitoFusion Marketplace
+</header>
 
-<p>Roblox Systems & Models</p>
+<div class="container">
 
-<h2>Shop GUI System</h2>
-<p>Price: 50 Robux</p>
+<div class="card">
+<img src="https://placehold.co/300x200">
+<div class="title">Shop GUI System</div>
+<div class="price">50 Robux</div>
+<button>Buy</button>
+</div>
+
+<div class="card">
+<img src="https://placehold.co/300x200">
+<div class="title">Admin Panel</div>
+<div class="price">100 Robux</div>
+<button>Buy</button>
+</div>
+
+<div class="card">
+<img src="https://placehold.co/300x200">
+<div class="title">Double Jump Script</div>
+<div class="price">30 Robux</div>
+<button>Buy</button>
+</div>
+
+</div>
 
 </body>
 </html>
