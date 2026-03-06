@@ -8,110 +8,82 @@
 
 body{
 margin:0;
-background:#0b0b0f;
-font-family:Arial;
+background:#0a0a0a;
 color:white;
-overflow-x:hidden;
-}
-
-/* fond animé */
-
-body::before{
-content:"";
-position:fixed;
-width:200%;
-height:200%;
-background:radial-gradient(circle,#00ffff22,transparent);
-animation:bgmove 15s linear infinite;
-z-index:-1;
-}
-
-@keyframes bgmove{
-0%{transform:translate(-10%,-10%)}
-50%{transform:translate(10%,10%)}
-100%{transform:translate(-10%,-10%)}
+font-family:Arial;
 }
 
 /* header */
 
 header{
 text-align:center;
-padding:60px 20px;
+padding:60px;
 font-size:40px;
-font-weight:bold;
-background:linear-gradient(90deg,#00ffff,#00ff99);
--webkit-background-clip:text;
-color:transparent;
-animation:glow 3s infinite alternate;
+letter-spacing:3px;
+border-bottom:1px solid #222;
 }
 
-@keyframes glow{
-from{filter:drop-shadow(0 0 5px #00ffff)}
-to{filter:drop-shadow(0 0 20px #00ffff)}
-}
-
-/* grid produits */
+/* grid */
 
 .container{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
+display:grid;
+grid-template-columns:repeat(auto-fit,250px);
 gap:40px;
-padding:40px;
+justify-content:center;
+padding:60px;
 }
 
-/* carte produit */
+/* cartes */
 
 .card{
-width:260px;
-background:#121218;
-border-radius:15px;
-padding:20px;
-text-align:center;
-transition:0.4s;
+background:#111;
 border:1px solid #222;
+border-radius:10px;
+padding:20px;
+transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-10px) scale(1.05);
-box-shadow:0 0 25px #00ffff88;
+transform:translateY(-8px);
+border:1px solid white;
 }
+
+/* image */
 
 .card img{
 width:100%;
-border-radius:10px;
+border-radius:8px;
 }
 
 /* titre */
 
 .title{
-font-size:22px;
+font-size:20px;
 margin-top:10px;
 }
 
 /* prix */
 
 .price{
-color:#00ffcc;
+color:#bbb;
 margin:10px 0;
 }
 
 /* bouton */
 
 button{
-padding:10px 20px;
+width:100%;
+padding:10px;
+background:white;
 border:none;
-border-radius:8px;
-background:linear-gradient(90deg,#00ffff,#00ff99);
 color:black;
-font-weight:bold;
 cursor:pointer;
+font-weight:bold;
 transition:0.3s;
 }
 
 button:hover{
-transform:scale(1.1);
-box-shadow:0 0 15px #00ffff;
+background:#ddd;
 }
 
 </style>
@@ -126,21 +98,21 @@ KitoFusion Marketplace
 <div class="container">
 
 <div class="card">
-<img src="https://placehold.co/300x200">
+<img src="https://placehold.co/300x200/111/FFF">
 <div class="title">Shop GUI System</div>
 <div class="price">50 Robux</div>
 <button>Buy</button>
 </div>
 
 <div class="card">
-<img src="https://placehold.co/300x200">
+<img src="https://placehold.co/300x200/111/FFF">
 <div class="title">Admin Panel</div>
 <div class="price">100 Robux</div>
 <button>Buy</button>
 </div>
 
 <div class="card">
-<img src="https://placehold.co/300x200">
+<img src="https://placehold.co/300x200/111/FFF">
 <div class="title">Double Jump Script</div>
 <div class="price">30 Robux</div>
 <button>Buy</button>
