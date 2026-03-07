@@ -1,124 +1,1780 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-<meta charset="UTF-8">
-<title>KitoFusion Marketplace</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KitoFusion Marketplace</title>
+  <meta name="description" content="Marketplace premium de modèles Roblox par KitoFusion Studio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070b17;
+      --bg-2: #0d1326;
+      --card: rgba(19, 27, 53, 0.72);
+      --card-strong: rgba(18, 28, 58, 0.92);
+      --line: rgba(255,255,255,0.09);
+      --text: #eef4ff;
+      --muted: #a6b4da;
+      --blue: #4da3ff;
+      --cyan: #52f4ff;
+      --purple: #8f68ff;
+      --pink: #ff6fcf;
+      --green: #4dff9f;
+      --gold: #ffd45c;
+      --danger: #ff7070;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.38);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --blur: blur(18px);
+      --max: 1240px;
+    }
 
-<style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-margin:0;
-background:#0a0a0a;
-color:white;
-font-family:Arial;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* header */
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(77,163,255,0.18), transparent 0 28%),
+        radial-gradient(circle at 85% 12%, rgba(143,104,255,0.18), transparent 0 28%),
+        radial-gradient(circle at 50% 80%, rgba(82,244,255,0.12), transparent 0 34%),
+        linear-gradient(180deg, #050914 0%, #0b1020 45%, #08101e 100%);
+      overflow-x: hidden;
+    }
 
-header{
-text-align:center;
-padding:60px;
-font-size:40px;
-letter-spacing:3px;
-border-bottom:1px solid #222;
-}
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: radial-gradient(circle at center, black 58%, transparent 100%);
+      pointer-events: none;
+      opacity: .45;
+      z-index: -4;
+    }
 
-/* grid */
+    .cursor-glow {
+      position: fixed;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle, rgba(82, 244, 255, 0.17), rgba(82, 244, 255, 0.05) 35%, transparent 70%);
+      transform: translate(-50%, -50%);
+      filter: blur(10px);
+    }
 
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,250px);
-gap:40px;
-justify-content:center;
-padding:60px;
-}
+    .orb {
+      position: fixed;
+      border-radius: 999px;
+      filter: blur(24px);
+      opacity: .45;
+      pointer-events: none;
+      z-index: -2;
+      animation: floatOrb 12s ease-in-out infinite;
+    }
 
-/* cartes */
+    .orb.one {
+      width: 340px;
+      height: 340px;
+      background: rgba(77, 163, 255, 0.2);
+      top: 10%;
+      left: -80px;
+    }
 
-.card{
-background:#111;
-border:1px solid #222;
-border-radius:10px;
-padding:20px;
-transition:0.3s;
-}
+    .orb.two {
+      width: 320px;
+      height: 320px;
+      background: rgba(143, 104, 255, 0.18);
+      top: 55%;
+      right: -90px;
+      animation-delay: -4s;
+    }
 
-.card:hover{
-transform:translateY(-8px);
-border:1px solid white;
-}
+    .orb.three {
+      width: 240px;
+      height: 240px;
+      background: rgba(255, 111, 207, 0.18);
+      bottom: 5%;
+      left: 20%;
+      animation-delay: -7s;
+    }
 
-/* image */
+    @keyframes floatOrb {
+      0%, 100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-30px) translateX(14px); }
+    }
 
-.card img{
-width:100%;
-border-radius:8px;
-}
+    .container {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto;
+    }
 
-/* titre */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(7, 11, 23, 0.65);
+      backdrop-filter: var(--blur);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
 
-.title{
-font-size:20px;
-margin-top:10px;
-}
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
+    }
 
-/* prix */
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--text);
+    }
 
-.price{
-color:#bbb;
-margin:10px 0;
-}
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.85), rgba(255,255,255,0) 25%),
+        linear-gradient(135deg, var(--cyan), var(--blue) 40%, var(--purple) 70%, var(--pink));
+      box-shadow: 0 10px 30px rgba(82, 244, 255, .22), inset 0 1px 1px rgba(255,255,255,.35);
+      position: relative;
+      overflow: hidden;
+    }
 
-/* bouton */
+    .logo::after {
+      content: "KF";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-family: Fredoka, sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0,0,0,.35);
+    }
 
-button{
-width:100%;
-padding:10px;
-background:white;
-border:none;
-color:black;
-cursor:pointer;
-font-weight:bold;
-transition:0.3s;
-}
+    .brand-text strong {
+      display: block;
+      font-family: Fredoka, sans-serif;
+      font-size: 1.12rem;
+      letter-spacing: .2px;
+    }
 
-button:hover{
-background:#ddd;
-}
+    .brand-text span {
+      font-size: .84rem;
+      color: var(--muted);
+    }
 
-</style>
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a,
+    .ghost-btn,
+    .cta-btn,
+    .chip,
+    .small-btn,
+    .filter-btn,
+    .social-btn {
+      text-decoration: none;
+      transition: .25s ease;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: .95rem;
+    }
+
+    .nav-links a:hover {
+      color: white;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .cta-btn,
+    .small-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #05111f;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 15px 35px rgba(77,163,255,.32);
+    }
+
+    .cta-btn {
+      padding: 15px 22px;
+      border-radius: 16px;
+      font-size: 1rem;
+    }
+
+    .cta-btn:hover,
+    .small-btn:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 22px 44px rgba(77,163,255,.38);
+    }
+
+    .ghost-btn,
+    .filter-btn,
+    .social-btn,
+    .chip {
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(8px);
+    }
+
+    .ghost-btn {
+      padding: 15px 20px;
+      border-radius: 16px;
+      font-weight: 700;
+    }
+
+    .ghost-btn:hover,
+    .filter-btn:hover,
+    .social-btn:hover,
+    .chip:hover {
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      position: relative;
+      padding: 68px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-card,
+    .panel,
+    .product-card,
+    .stat-card,
+    .faq-item,
+    .review-card,
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      backdrop-filter: var(--blur);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      border-radius: 32px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -30% -55% auto;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(82,244,255,.25), transparent 65%);
+      z-index: -1;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      color: white;
+      background: linear-gradient(135deg, rgba(82,244,255,.14), rgba(143,104,255,.18));
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    }
+
+    .hero h1 {
+      margin: 16px 0 14px;
+      font-family: Fredoka, sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.6rem);
+      line-height: .95;
+      letter-spacing: -.04em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 15%, #a6e7ff 36%, #7fc0ff 58%, #d9b8ff 80%, #ffb6e8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 22px rgba(77,163,255,.18);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      max-width: 780px;
+    }
+
+    .hero-actions,
+    .hero-tags,
+    .panel-row,
+    .filters,
+    .stats-grid,
+    .feature-grid,
+    .review-grid,
+    .footer-grid,
+    .socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-actions { margin-top: 22px; }
+    .hero-tags { margin-top: 20px; }
+
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: .92rem;
+      font-weight: 700;
+      color: #dfeaff;
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      border-radius: 28px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel h3,
+    .section-head h2,
+    .faq-title,
+    .review-title,
+    .footer-brand h3 {
+      margin: 0;
+      font-family: Fredoka, sans-serif;
+      letter-spacing: -.02em;
+    }
+
+    .panel h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .panel p,
+    .section-head p,
+    .feature-card p,
+    .faq-answer,
+    .review-card p,
+    .footer-brand p,
+    .footer-col a,
+    .copyright {
+      color: var(--muted);
+    }
+
+    .panel-preview {
+      margin-top: 18px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 18px;
+    }
+
+    .preview-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      gap: 10px;
+    }
+
+    .preview-pill,
+    .robux-badge,
+    .stock-badge,
+    .tag,
+    .notify-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .preview-pill {
+      padding: 9px 12px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.07);
+      color: white;
+      font-size: .88rem;
+    }
+
+    .preview-box {
+      padding: 18px;
+      background: rgba(3, 7, 18, .46);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .bars { display: grid; gap: 10px; }
+    .bar {
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,.06);
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      animation: pulseBar 4.5s ease-in-out infinite;
+    }
+
+    @keyframes pulseBar {
+      0%, 100% { transform: scaleX(.94); transform-origin: left; }
+      50% { transform: scaleX(1); transform-origin: left; }
+    }
+
+    .mini-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .mini-card {
+      min-height: 100px;
+      border-radius: 20px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: .98rem;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      font-size: clamp(1.85rem, 3vw, 2.7rem);
+    }
+
+    .section-head p {
+      margin: 8px 0 0;
+      max-width: 720px;
+      line-height: 1.7;
+    }
+
+    .stats-grid,
+    .feature-grid,
+    .review-grid,
+    .products-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .stat-card {
+      border-radius: 22px;
+      padding: 22px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: clamp(1.6rem, 2vw, 2.3rem);
+      margin-bottom: 8px;
+      font-family: Fredoka, sans-serif;
+    }
+
+    .stat-card span {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .feature-card {
+      border-radius: 26px;
+      padding: 24px;
+      min-height: 190px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      font-size: 1.45rem;
+      background: linear-gradient(135deg, rgba(82,244,255,.18), rgba(143,104,255,.24));
+      border: 1px solid rgba(255,255,255,.09);
+      margin-bottom: 14px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.15rem;
+    }
+
+    .feature-card p {
+      margin: 0;
+      line-height: 1.7;
+    }
+
+    .market-controls {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .search-wrap {
+      position: relative;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: 18px 20px 18px 54px;
+      border-radius: 18px;
+      outline: none;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.05);
+      color: white;
+      font-size: 1rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .search-wrap input::placeholder { color: #8fa2d3; }
+
+    .search-icon {
+      position: absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: .7;
+      font-size: 1rem;
+    }
+
+    .filters {
+      align-items: center;
+    }
+
+    .filter-btn {
+      padding: 11px 15px;
+      border-radius: 999px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, rgba(82,244,255,.22), rgba(77,163,255,.22));
+      border-color: rgba(82,244,255,.22);
+      box-shadow: 0 10px 24px rgba(77,163,255,.15);
+    }
+
+    .products-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .product-card {
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      transform: translateY(18px);
+      opacity: 0;
+    }
+
+    .product-card.show {
+      transform: translateY(0);
+      opacity: 1;
+      transition: transform .55s cubic-bezier(.2,.8,.2,1), opacity .55s ease;
+    }
+
+    .thumb {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(82,244,255,.18), rgba(143,104,255,.25));
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.03);
+      transition: transform .5s ease;
+    }
+
+    .product-card:hover .thumb img {
+      transform: scale(1.1);
+    }
+
+    .thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(5,10,21,0) 25%, rgba(5,10,21,.72) 100%);
+      pointer-events: none;
+    }
+
+    .card-top {
+      position: absolute;
+      inset: 14px 14px auto 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      background: rgba(7, 14, 28, .72);
+      border: 1px solid rgba(255,255,255,.08);
+      color: #eaf6ff;
+      font-size: .82rem;
+    }
+
+    .robux-badge {
+      padding: 10px 12px;
+      color: #05111f;
+      background: linear-gradient(135deg, var(--gold), #ffea96);
+      box-shadow: 0 12px 30px rgba(255,212,92,.25);
+      font-size: .88rem;
+    }
+
+    .stock-badge {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      z-index: 2;
+      padding: 9px 12px;
+      background: rgba(7, 14, 28, .76);
+      border: 1px solid rgba(255,255,255,.08);
+      color: white;
+      font-size: .82rem;
+    }
+
+    .product-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+    }
+
+    .product-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .product-title {
+      margin: 0;
+      font-size: 1.15rem;
+      font-family: Fredoka, sans-serif;
+    }
+
+    .product-desc {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: .96rem;
+    }
+
+    .rating {
+      color: #ffd976;
+      font-weight: 700;
+      font-size: .95rem;
+      white-space: nowrap;
+    }
+
+    .product-points {
+      display: grid;
+      gap: 9px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .product-points li {
+      color: #d8e7ff;
+      font-size: .93rem;
+      display: flex;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .product-points li::before {
+      content: "✦";
+      color: var(--cyan);
+      margin-top: 1px;
+    }
+
+    .product-actions {
+      margin-top: auto;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .small-btn,
+    .social-btn {
+      padding: 12px 15px;
+      border-radius: 14px;
+      font-size: .93rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+    }
+
+    .social-btn {
+      color: white;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+    }
+
+    .review-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .review-card {
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .review-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .review-title {
+      font-size: 1.08rem;
+    }
+
+    .review-card p {
+      line-height: 1.75;
+      margin: 0 0 12px;
+    }
+
+    .review-user {
+      font-size: .94rem;
+      color: #dce8ff;
+      font-weight: 700;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item {
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      background: transparent;
+      color: white;
+      border: none;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease;
+      padding: 0 22px;
+      line-height: 1.7;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 220px;
+      padding-bottom: 20px;
+    }
+
+    .faq-icon {
+      font-size: 1.2rem;
+      color: var(--cyan);
+      transition: transform .25s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .notify-card,
+    .footer-wrap {
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .notify-card {
+      padding: 28px;
+      position: relative;
+    }
+
+    .notify-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -80px;
+      top: -60px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(82,244,255,.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    .notify-card h3 {
+      margin: 0 0 10px;
+      font-family: Fredoka, sans-serif;
+      font-size: 2rem;
+    }
+
+    .notify-card p {
+      margin: 0 0 20px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 700px;
+    }
+
+    .notify-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .notify-row input {
+      flex: 1 1 260px;
+      min-width: 0;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.05);
+      color: white;
+      font-size: .98rem;
+      outline: none;
+    }
+
+    .notify-badge {
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      color: white;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.05);
+    }
+
+    footer {
+      padding: 20px 0 42px;
+    }
+
+    .footer-wrap {
+      padding: 28px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr .8fr;
+      gap: 22px;
+    }
+
+    .footer-brand p {
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    .footer-col h4 {
+      margin: 0 0 14px;
+      font-size: 1rem;
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col a {
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .footer-col a:hover {
+      color: white;
+    }
+
+    .socials {
+      margin-top: 14px;
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,.07);
+      margin-top: 24px;
+      padding-top: 18px;
+      font-size: .92rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: .65s cubic-bezier(.2,.75,.2,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background: rgba(3, 6, 15, .72);
+      backdrop-filter: blur(10px);
+      z-index: 120;
+      opacity: 0;
+      visibility: hidden;
+      transition: .25s ease;
+    }
+
+    .modal.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-box {
+      width: min(620px, 100%);
+      background: linear-gradient(180deg, rgba(18,28,58,.96), rgba(11,18,36,.97));
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 30px 80px rgba(0,0,0,.45);
+      overflow: hidden;
+      transform: translateY(14px) scale(.98);
+      transition: .25s ease;
+    }
+
+    .modal.open .modal-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-head,
+    .modal-body,
+    .modal-foot {
+      padding: 22px;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+    .modal-head h3 {
+      margin: 0;
+      font-family: Fredoka, sans-serif;
+      font-size: 1.6rem;
+    }
+
+    .modal-head p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .close-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.05);
+      color: white;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .modal-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .modal-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .modal-foot {
+      border-top: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .modal-price {
+      font-weight: 900;
+      font-size: 1.15rem;
+      color: #fff3b9;
+    }
+
+    .hide { display: none !important; }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .contact-panel,
+      .footer-grid,
+      .feature-grid,
+      .review-grid,
+      .stats-grid,
+      .products-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-grid { grid-template-columns: 1fr; }
+      .contact-panel,
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .nav { align-items: start; flex-direction: column; }
+      .nav-links { width: 100%; }
+      .hero { padding-top: 38px; }
+      .hero-card, .panel, .notify-card, .footer-wrap { padding: 22px; }
+      .products-grid,
+      .review-grid,
+      .feature-grid,
+      .stats-grid { grid-template-columns: 1fr; }
+      .mini-cards { grid-template-columns: 1fr; }
+      .product-actions > * { flex: 1 1 100%; }
+      .modal-foot { align-items: stretch; }
+      .modal-foot > * { width: 100%; }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="orb one" aria-hidden="true"></div>
+  <div class="orb two" aria-hidden="true"></div>
+  <div class="orb three" aria-hidden="true"></div>
 
-<header>
-KitoFusion Marketplace
-</header>
+  <header>
+    <div class="container nav">
+      <a href="#top" class="brand">
+        <div class="logo"></div>
+        <div class="brand-text">
+          <strong>KitoFusion Marketplace</strong>
+          <span>Premium Roblox Models • Scripts • UI</span>
+        </div>
+      </a>
 
-<div class="container">
+      <nav class="nav-links">
+        <a href="#market">Shop</a>
+        <a href="#features">Avantages</a>
+        <a href="#reviews">Avis</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a class="cta-btn" href="#market">Explorer le shop</a>
+      </nav>
+    </div>
+  </header>
 
-<div class="card">
-<img src="https://placehold.co/300x200/111/FFF">
-<div class="title">Shop GUI System</div>
-<div class="price">50 Robux</div>
-<button>Buy</button>
-</div>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card reveal visible">
+          <div class="kicker">⚡ Assets Roblox ultra stylés pour ton jeu</div>
+          <h1><span class="gradient-text">Build ton jeu avec des modèles premium.</span></h1>
+          <p>
+            Vends tes modèles Roblox, systèmes UI, scripts, packs d'admin et assets exclusifs sur un site ultra moderne, animé et propre.
+            Le design est pensé pour impressionner direct sur GitHub Pages et convertir les visiteurs en acheteurs.
+          </p>
 
-<div class="card">
-<img src="https://placehold.co/300x200/111/FFF">
-<div class="title">Admin Panel</div>
-<div class="price">100 Robux</div>
-<button>Buy</button>
-</div>
+          <div class="hero-actions">
+            <a href="#market" class="cta-btn">🛒 Voir les produits</a>
+            <a href="#contact" class="ghost-btn">💬 Me contacter</a>
+          </div>
 
-<div class="card">
-<img src="https://placehold.co/300x200/111/FFF">
-<div class="title">Double Jump Script</div>
-<div class="price">30 Robux</div>
-<button>Buy</button>
-</div>
+          <div class="hero-tags">
+            <span class="chip">✨ Full animations</span>
+            <span class="chip">💎 Prix en Robux</span>
+            <span class="chip">🚀 Ready GitHub Pages</span>
+            <span class="chip">🎮 Style Roblox premium</span>
+          </div>
+        </div>
 
-</div>
+        <div class="hero-side reveal">
+          <div class="panel">
+            <h3>Marketplace Showcase</h3>
+            <p>Un aperçu visuel de ton shop avec cartes premium, badges Robux et animations au scroll.</p>
 
+            <div class="panel-preview">
+              <div class="preview-top">
+                <span class="preview-pill">🔥 Best Seller</span>
+                <span class="preview-pill">⚙️ Full Setup</span>
+              </div>
+
+              <div class="preview-box">
+                <div class="bars">
+                  <div class="bar"><span style="width: 92%"></span></div>
+                  <div class="bar"><span style="width: 74%"></span></div>
+                  <div class="bar"><span style="width: 84%"></span></div>
+                </div>
+
+                <div class="mini-cards">
+                  <div class="mini-card">
+                    <strong>Shop UI System</strong>
+                    <span>Animations propres, boutons stylés, aperçu premium.</span>
+                  </div>
+                  <div class="mini-card">
+                    <strong>Admin Panel</strong>
+                    <span>Commandes, logs, permissions et setup rapide.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-row" style="justify-content:space-between;align-items:center;">
+              <div>
+                <h3>Pourquoi ça claque</h3>
+                <p>Glow, glassmorphism, hover effects, reveal animation, filtre produits et modal d'achat.</p>
+              </div>
+            </div>
+            <div class="hero-tags" style="margin-top:14px;">
+              <span class="chip">🎨 Design fort</span>
+              <span class="chip">📱 Responsive</span>
+              <span class="chip">🧠 Facile à modifier</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container stats-grid reveal">
+        <div class="stat-card"><strong>20+</strong><span>Produits à vendre</span></div>
+        <div class="stat-card"><strong>100%</strong><span>Compatible GitHub Pages</span></div>
+        <div class="stat-card"><strong>Full</strong><span>HTML • CSS • JS inclus</span></div>
+        <div class="stat-card"><strong>Ultra</strong><span>Animations & visuel premium</span></div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Pourquoi ce site est meilleur</h2>
+            <p>Le but n'est pas juste de montrer tes modèles. Le but c'est de les vendre avec un site qui inspire confiance, donne envie et met en valeur ton branding KitoFusion.</p>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">🚀</div>
+            <h3>Impact direct</h3>
+            <p>Hero puissant, glow premium et structure visuelle qui donne tout de suite une impression de site pro.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">💰</div>
+            <h3>Prix Robux visibles</h3>
+            <p>Badges Robux lumineux, best sellers, filtres et CTA d'achat pensés pour convertir plus vite.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🧩</div>
+            <h3>Facile à éditer</h3>
+            <p>Tu peux remplacer les images, textes, prix, liens Discord ou Gamepass sans casser le design.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="market">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Marketplace</h2>
+            <p>Tu peux modifier chaque carte pour tes vrais produits. Les cartes ci-dessous sont déjà prêtes avec images, catégories, prix Robux, stock et détails.</p>
+          </div>
+        </div>
+
+        <div class="market-controls reveal">
+          <div class="search-wrap">
+            <span class="search-icon">🔎</span>
+            <input id="searchInput" type="text" placeholder="Rechercher un produit, script, GUI, admin panel..." />
+          </div>
+
+          <div class="filters">
+            <button class="filter-btn active" data-filter="all">Tout</button>
+            <button class="filter-btn" data-filter="ui">UI</button>
+            <button class="filter-btn" data-filter="admin">Admin</button>
+            <button class="filter-btn" data-filter="script">Script</button>
+            <button class="filter-btn" data-filter="bundle">Bundle</button>
+          </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+          <article class="product-card reveal-product" data-category="ui" data-name="shop gui system premium roblox">
+            <div class="thumb">
+              <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80" alt="Shop GUI System" />
+              <div class="card-top">
+                <span class="tag">UI System</span>
+                <span class="robux-badge">🪙 50 Robux</span>
+              </div>
+              <span class="stock-badge">✅ Instant delivery</span>
+            </div>
+            <div class="product-body">
+              <div class="product-title-row">
+                <h3 class="product-title">Shop GUI System</h3>
+                <span class="rating">★ 4.9</span>
+              </div>
+              <p class="product-desc">Interface shop moderne avec animations, catégories, boutons stylés et design premium Roblox.</p>
+              <ul class="product-points">
+                <li>Structure clean et facile à intégrer</li>
+                <li>Look premium qui fait pro</li>
+                <li>Parfait pour SkyFall ou n'importe quel simulator</li>
+              </ul>
+              <div class="product-actions">
+                <button class="small-btn buy-btn" data-title="Shop GUI System" data-price="50 Robux">Acheter</button>
+                <button class="social-btn details-btn" data-title="Shop GUI System" data-price="50 Robux" data-desc="Interface premium avec boutons animés, cartes de produits, sections et look moderne." data-list="Code propre|Effets hover et glow|Facile à recolor|Responsive desktop/mobile">Détails</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal-product" data-category="admin" data-name="admin panel advanced roblox commands">
+            <div class="thumb">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Admin Panel" />
+              <div class="card-top">
+                <span class="tag">Admin</span>
+                <span class="robux-badge">🪙 100 Robux</span>
+              </div>
+              <span class="stock-badge">🔥 Best seller</span>
+            </div>
+            <div class="product-body">
+              <div class="product-title-row">
+                <h3 class="product-title">Admin Panel</h3>
+                <span class="rating">★ 5.0</span>
+              </div>
+              <p class="product-desc">Panel admin complet avec commandes, permissions, menu propre et système fait pour les vrais projets Roblox.</p>
+              <ul class="product-points">
+                <li>Design stylé et lisible</li>
+                <li>Parfait pour gérer tes tests et modération</li>
+                <li>Structure prête à upgrade</li>
+              </ul>
+              <div class="product-actions">
+                <button class="small-btn buy-btn" data-title="Admin Panel" data-price="100 Robux">Acheter</button>
+                <button class="social-btn details-btn" data-title="Admin Panel" data-price="100 Robux" data-desc="Panel administrateur premium avec sections propres, logs et base parfaite pour commandes avancées." data-list="UI immersive|Organisation claire|Base extensible|Effet premium">Détails</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal-product" data-category="script" data-name="double jump script movement roblox">
+            <div class="thumb">
+              <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80" alt="Double Jump Script" />
+              <div class="card-top">
+                <span class="tag">Script</span>
+                <span class="robux-badge">🪙 30 Robux</span>
+              </div>
+              <span class="stock-badge">⚡ Fast setup</span>
+            </div>
+            <div class="product-body">
+              <div class="product-title-row">
+                <h3 class="product-title">Double Jump Script</h3>
+                <span class="rating">★ 4.8</span>
+              </div>
+              <p class="product-desc">Script movement simple, utile et populaire, idéal pour obby, challenge game et modes de jeu rapides.</p>
+              <ul class="product-points">
+                <li>Facile à intégrer dans ton jeu</li>
+                <li>Effet fun immédiat</li>
+                <li>Parfait pour petits projets et bundles</li>
+              </ul>
+              <div class="product-actions">
+                <button class="small-btn buy-btn" data-title="Double Jump Script" data-price="30 Robux">Acheter</button>
+                <button class="social-btn details-btn" data-title="Double Jump Script" data-price="30 Robux" data-desc="Script pratique à vendre seul ou en bundle avec d'autres mécaniques de gameplay." data-list="Intégration rapide|Bon pour obby|Code simple|Compatible custom FX">Détails</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal-product" data-category="ui" data-name="leaderboard ui coins premium">
+            <div class="thumb">
+              <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80" alt="Coins Leaderboard UI" />
+              <div class="card-top">
+                <span class="tag">UI</span>
+                <span class="robux-badge">🪙 65 Robux</span>
+              </div>
+              <span class="stock-badge">💎 Premium</span>
+            </div>
+            <div class="product-body">
+              <div class="product-title-row">
+                <h3 class="product-title">Coins Leaderboard UI</h3>
+                <span class="rating">★ 4.9</span>
+              </div>
+              <p class="product-desc">HUD coins + leaderboard premium avec style moderne, éléments brillants et lisibilité parfaite.</p>
+              <ul class="product-points">
+                <li>Excellent pour simulator</li>
+                <li>Look très propre in-game</li>
+                <li>Valeur perçue plus élevée</li>
+              </ul>
+              <div class="product-actions">
+                <button class="small-btn buy-btn" data-title="Coins Leaderboard UI" data-price="65 Robux">Acheter</button>
+                <button class="social-btn details-btn" data-title="Coins Leaderboard UI" data-price="65 Robux" data-desc="Pack UI pour afficher pièces, progression et classement avec une esthétique premium." data-list="Textes lisibles|Design clean|Bon pour simulator|Rendu moderne">Détails</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal-product" data-category="bundle" data-name="skyfall starter bundle ui scripts systems">
+            <div class="thumb">
+              <img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&w=1200&q=80" alt="Starter Bundle" />
+              <div class="card-top">
+                <span class="tag">Bundle</span>
+                <span class="robux-badge">🪙 180 Robux</span>
+              </div>
+              <span class="stock-badge">🚀 Bundle value</span>
+            </div>
+            <div class="product-body">
+              <div class="product-title-row">
+                <h3 class="product-title">Starter Bundle</h3>
+                <span class="rating">★ 5.0</span>
+              </div>
+              <p class="product-desc">Pack complet avec plusieurs modèles utiles pour lancer rapidement un jeu avec une base sérieuse.</p>
+              <ul class="product-points">
+                <li>Meilleur rapport qualité/prix</li>
+                <li>Idéal pour débuter un gros projet</li>
+                <li>Bonne offre à mettre en avant</li>
+              </ul>
+              <div class="product-actions">
+                <button class="small-btn buy-btn" data-title="Starter Bundle" data-price="180 Robux">Acheter</button>
+                <button class="social-btn details-btn" data-title="Starter Bundle" data-price="180 Robux" data-desc="Bundle avec scripts, UI et systèmes utiles pour accélérer le développement de ton jeu." data-list="Pack rentable|Parfait pour setup rapide|Effet boutique premium|Offre mise en avant">Détails</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product-card reveal-product" data-category="script" data-name="kill brick system classic script">
+            <div class="thumb">
+              <img src="https://images.unsplash.com/photo-1511882150382-421056c89033?auto=format&fit=crop&w=1200&q=80" alt="Kill Brick System" />
+              <div class="card-top">
+                <span class="tag">Script</span>
+                <span class="robux-badge">🪙 20 Robux</span>
+              </div>
+              <span class="stock-badge">🧱 Classic essential</span>
+            </div>
+            <div class="product-body">
+              <div class="product-title-row">
+                <h3 class="product-title">Kill Brick System</h3>
+                <span class="rating">★ 4.7</span>
+              </div>
+              <p class="product-desc">Petit système simple mais très pratique pour obby, maps piégées, modes old Roblox ou mini-games.</p>
+              <ul class="product-points">
+                <li>Facile à vendre à bas prix</li>
+                <li>Bon produit d'appel</li>
+                <li>Peut booster tes ventes bundle</li>
+              </ul>
+              <div class="product-actions">
+                <button class="small-btn buy-btn" data-title="Kill Brick System" data-price="20 Robux">Acheter</button>
+                <button class="social-btn details-btn" data-title="Kill Brick System" data-price="20 Robux" data-desc="Script accessible et utile comme petit achat rapide ou ajout dans des packs plus gros." data-list="Simple|Petit prix|Pratique|Bon add-on">Détails</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>Avis clients</h2>
+            <p>Tu peux remplacer ces témoignages par les tiens. Ils sont là pour donner un vrai effet marketplace crédible.</p>
+          </div>
+        </div>
+
+        <div class="review-grid">
+          <article class="review-card reveal">
+            <div class="review-top">
+              <h3 class="review-title">Incroyable qualité</h3>
+              <span class="rating">★★★★★</span>
+            </div>
+            <p>Le système était propre, bien organisé et très stylé en jeu. Franchement ça fait tout de suite plus professionnel.</p>
+            <span class="review-user">— Roblox Creator</span>
+          </article>
+
+          <article class="review-card reveal">
+            <div class="review-top">
+              <h3 class="review-title">Très rentable</h3>
+              <span class="rating">★★★★★</span>
+            </div>
+            <p>J'ai acheté un pack et j'ai pu lancer mon jeu plus vite. L'UI rend super bien et ça évite de tout faire depuis zéro.</p>
+            <span class="review-user">— Indie Dev</span>
+          </article>
+
+          <article class="review-card reveal">
+            <div class="review-top">
+              <h3 class="review-title">Design lourd</h3>
+              <span class="rating">★★★★★</span>
+            </div>
+            <p>Le style fait vraiment premium. On sent que le site et les assets sont pensés pour vendre et attirer l'œil direct.</p>
+            <span class="review-user">— Studio Owner</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <h2>FAQ</h2>
+            <p>Section parfaite pour répondre aux questions les plus fréquentes et rassurer les visiteurs avant achat.</p>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item reveal active">
+            <button class="faq-question">
+              <span>Comment l'acheteur reçoit le modèle ?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">Tu peux envoyer le modèle via Discord, Google Drive, GitHub privé ou toute autre méthode que tu utilises après paiement.</div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">
+              <span>Je peux remplacer les prix Robux ?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">Oui, tous les prix sont faciles à modifier dans le HTML. Tu peux mettre Robux, euros, ou même un mix des deux selon ton système.</div>
+          </div>
+
+          <div class="faq-item reveal">
+            <button class="faq-question">
+              <span>Le site fonctionne sur GitHub Pages ?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">Oui. Le fichier est prêt pour GitHub Pages. Tu mets simplement le code dans ton index.html et tu publies ton repo.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-panel reveal">
+        <div class="notify-card">
+          <span class="notify-badge">📢 New drops & packs exclusifs</span>
+          <h3>Prêt à vendre tes modèles comme un vrai studio ?</h3>
+          <p>
+            Ajoute ici ton Discord, ton pseudo Roblox, ton groupe, ou un formulaire externe. Cette section peut servir pour les commandes custom, les demandes privées ou les annonces de nouveaux produits.
+          </p>
+
+          <div class="notify-row">
+            <input id="emailMock" type="text" placeholder="Ton Discord, ton email ou ton pseudo Roblox" />
+            <button class="cta-btn" id="notifyBtn">Recevoir les nouveautés</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Liens rapides</h3>
+          <p>Remplace ces boutons par tes vrais liens.</p>
+          <div class="socials">
+            <a class="social-btn" href="https://discord.com" target="_blank" rel="noreferrer">Discord</a>
+            <a class="social-btn" href="https://www.roblox.com" target="_blank" rel="noreferrer">Roblox Group</a>
+            <a class="social-btn" href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="social-btn" href="https://youtube.com" target="_blank" rel="noreferrer">YouTube</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-wrap reveal">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>KitoFusion Marketplace</h3>
+          <p>Site vitrine et boutique premium pour vendre tes modèles Roblox, systèmes UI, scripts et bundles avec une vraie identité visuelle.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <a href="#market">Shop</a>
+          <a href="#features">Avantages</a>
+          <a href="#reviews">Avis</a>
+          <a href="#faq">FAQ</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <a href="#contact">Contact direct</a>
+          <a href="https://discord.com" target="_blank" rel="noreferrer">Discord</a>
+          <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://www.roblox.com" target="_blank" rel="noreferrer">Roblox</a>
+        </div>
+      </div>
+
+      <div class="copyright">© 2026 KitoFusion Studio • Marketplace premium by KitoGame</div>
+    </div>
+  </footer>
+
+  <div class="modal" id="productModal" aria-hidden="true">
+    <div class="modal-box">
+      <div class="modal-head">
+        <div>
+          <h3 id="modalTitle">Produit</h3>
+          <p id="modalDesc">Description du produit.</p>
+        </div>
+        <button class="close-btn" id="closeModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <ul class="modal-list" id="modalList"></ul>
+      </div>
+      <div class="modal-foot">
+        <div class="modal-price" id="modalPrice">0 Robux</div>
+        <div class="hero-actions" style="margin:0;">
+          <button class="small-btn" id="buyNowBtn">Acheter maintenant</button>
+          <button class="social-btn" id="discordBtn">Contacter sur Discord</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const cursorGlow = document.querySelector('.cursor-glow');
+    window.addEventListener('mousemove', (e) => {
+      cursorGlow.style.left = e.clientX + 'px';
+      cursorGlow.style.top = e.clientY + 'px';
+    });
+
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealProducts = document.querySelectorAll('.product-card');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.14 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    const productObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('show'), index * 80);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealProducts.forEach(card => productObserver.observe(card));
+
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+    const searchInput = document.getElementById('searchInput');
+    let currentFilter = 'all';
+
+    function filterProducts() {
+      const term = searchInput.value.toLowerCase().trim();
+      productCards.forEach(card => {
+        const category = card.dataset.category;
+        const name = card.dataset.name;
+        const matchesFilter = currentFilter === 'all' || category === currentFilter;
+        const matchesSearch = name.includes(term);
+        const visible = matchesFilter && matchesSearch;
+        card.classList.toggle('hide', !visible);
+      });
+    }
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        filterProducts();
+      });
+    });
+
+    searchInput.addEventListener('input', filterProducts);
+
+    const modal = document.getElementById('productModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalList = document.getElementById('modalList');
+    const modalPrice = document.getElementById('modalPrice');
+    const closeModal = document.getElementById('closeModal');
+    const buyNowBtn = document.getElementById('buyNowBtn');
+    const discordBtn = document.getElementById('discordBtn');
+
+    function openModal(title, price, desc, list) {
+      modalTitle.textContent = title;
+      modalPrice.textContent = price;
+      modalDesc.textContent = desc;
+      modalList.innerHTML = '';
+      list.split('|').forEach(item => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span>${item}</span><strong>✔</strong>`;
+        modalList.appendChild(li);
+      });
+      buyNowBtn.onclick = () => {
+        alert(`Redirige ici vers ton lien d'achat pour : ${title}`);
+      };
+      discordBtn.onclick = () => {
+        window.open('https://discord.com', '_blank');
+      };
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    document.querySelectorAll('.details-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openModal(btn.dataset.title, btn.dataset.price, btn.dataset.desc, btn.dataset.list);
+      });
+    });
+
+    document.querySelectorAll('.buy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert(`Ajoute ici ton vrai lien d'achat pour : ${btn.dataset.title} (${btn.dataset.price})`);
+      });
+    });
+
+    function closeProductModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    closeModal.addEventListener('click', closeProductModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeProductModal();
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeProductModal();
+    });
+
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+
+    document.getElementById('notifyBtn').addEventListener('click', () => {
+      const value = document.getElementById('emailMock').value.trim();
+      if (!value) {
+        alert('Ajoute ton pseudo, ton Discord ou ton email avant.');
+        return;
+      }
+      alert(`Parfait ${value} ! Remplace cette alerte par ton vrai système de contact.`);
+      document.getElementById('emailMock').value = '';
+    });
+  </script>
 </body>
 </html>
